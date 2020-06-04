@@ -18,49 +18,42 @@
 
 #imports
 import random 
-#vars which i need
+
 #gen standard
 
 def first_three():
-    a = random.randint(0, 9)
-    b = random.randint(0, 9)
-    c = random.randint(0, 9)
-    return str(a) + str(b) + str(c)
-
-def check_f():
-    if first == '333-' or first == '444-' or first == '555-' or first == '666-' or first == '777-' or first == '888-' or first == '999-':
-        goodThree = False
-    else:
-        goodThree = True
-    return goodThree
+    initial_batch = ''
+    l = 11 #starts out of range 
+    for i in range(3):
+        t = random.randint(0,9)
+        #rather than having a big if statement showing all of the incompatible 333, 444, 555, etc. i just dont allow triples by checking against last one
+        while l == t:
+            t = random.randint(0,9)
+        l = t
+        initial_batch = initial_batch + str(t)
+    return initial_batch + '-'
+        
 
 def gen_the_rest():
     while True:
-        a = random.randint(0, 9)
-        b = random.randint(0, 9)
-        c = random.randint(0, 9)
-        d = random.randint(0, 9)
-        e = random.randint(0, 9)
-        f = random.randint(0, 9)
-        g = random.randint(0, 9)
-        sum = a + b + c + d + e + f + g
+        sum = 0
+        konked = ''
+        for i in range(7) :
+            t = random.randint(0,9)
+            sum = sum + t
+            konked = konked + str(t)
         if sum % 7 == 0:
-            return str(a) + str(b) + str(c) + str(d) + str(e) + str(f) + str(g)
+            return konked
         else: 
             sum = 0
+            konked = ''
 
 
 
-#run
-#gen the first three
-while True: #apparently there are no do while loops in python.. bruh
-    first = first_three() + '-'
-    print(first)
-    if check_f() == True:
-        break
-full = first + gen_the_rest()
+#run.. or should i say Main()hahahahahahahahahahahh
 
+first = first_three()
 rest = gen_the_rest()
-print(full)
+full = first + rest
 print(full)
 
